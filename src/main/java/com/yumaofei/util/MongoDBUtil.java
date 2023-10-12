@@ -38,6 +38,13 @@ public class MongoDBUtil {
     public MongoDBUtil() {
     }
 
+    public MongoDBUtil(String mongodbLocalhost,String mongodbUsrename,String mongodbPassword,String mongodbDatabase) {
+        this.mongodbLocalhost = mongodbLocalhost;
+        this.mongodbUsrename = mongodbUsrename;
+        this.mongodbPassword = mongodbPassword;
+        this.mongodbDatabase = mongodbDatabase;
+    }
+
     public MongoDBUtil(String mongodbLocalhost,int mongodbPort,String mongodbUsrename,String mongodbPassword,String mongodbDatabase) {
         this.mongodbLocalhost = mongodbLocalhost;
         this.mongodbPort = mongodbPort;
@@ -93,7 +100,8 @@ public class MongoDBUtil {
         try {
             //连接到MongoDB服务 如果是远程连接可以替换“localhost”为服务器所在IP地址
             //ServerAddress()两个参数分别为 服务器地址 和 端口
-            ServerAddress serverAddress = new ServerAddress(mongodbLocalhost,mongodbPort);
+//            ServerAddress serverAddress = new ServerAddress(mongodbLocalhost,mongodbPort);
+            ServerAddress serverAddress = new ServerAddress(mongodbLocalhost);
             List<ServerAddress> addrs = new ArrayList<ServerAddress>();
             addrs.add(serverAddress);
 

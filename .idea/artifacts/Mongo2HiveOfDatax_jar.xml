@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Mongo2HiveOfDatax:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Mongo2HiveOfDatax_jar</output-path>
+    <root id="archive" name="Mongo2HiveOfDatax.jar">
+      <element id="module-output" name="Mongo2HiveOfDatax" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/mongodb/mongo-java-driver/3.11.0/mongo-java-driver-3.11.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/alibaba/fastjson2/fastjson2/2.0.23/fastjson2-2.0.23.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
