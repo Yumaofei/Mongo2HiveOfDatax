@@ -54,7 +54,7 @@ public class CreateSql {
             if (value.equals("double"))
                 columns += key + " decimal(16,4) comment'',\n\t";
             else
-                columns += key + " " + columnsMap.get(key) + " comment'',\n\t";
+                columns += key + " string comment'',\n\t";
         }
         columns = columns.trim();
         columns = columns.substring(0, columns.length() - 1);
