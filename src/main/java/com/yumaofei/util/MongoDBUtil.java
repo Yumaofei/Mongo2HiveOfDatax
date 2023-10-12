@@ -106,7 +106,7 @@ public class MongoDBUtil {
             addrs.add(serverAddress);
 
             //MongoCredential.createScramSha1Credential()三个参数分别为 用户名 数据库名称 密码
-            MongoCredential credential = MongoCredential.createScramSha1Credential(mongodbUsrename, mongodbDatabase, mongodbPassword.toCharArray());
+            MongoCredential credential = MongoCredential.createCredential(mongodbUsrename, mongodbDatabase, mongodbPassword.toCharArray());
             List<MongoCredential> credentials = new ArrayList<MongoCredential>();
             credentials.add(credential);
 

@@ -74,14 +74,14 @@ public class CreateJson {
         jobContentReader.put("parameter",jobReaderParameter);
         //设置datax的job的content的reader的parameter的address
         ArrayList<String> address = new ArrayList<>();
-        address.add("");
+        address.add("${zhiziSorceDbAddress}");
         jobReaderParameter.put("address",address);
         //设置datax的job的content的reader的parameter的userName
-        jobReaderParameter.put("userName","");
+        jobReaderParameter.put("userName","${zhiziSorceDbUsername}");
         //设置datax的job的content的reader的parameter的userPassword
-        jobReaderParameter.put("userPassword","");
+        jobReaderParameter.put("userPassword","${zhiziSorceDbPassword}");
         //设置datax的job的content的reader的parameter的dbName
-        jobReaderParameter.put("dbName","");
+        jobReaderParameter.put("dbName","${zhiziSorceDbDatabase}");
         //设置datax的job的content的reader的parameter的collectionName
         jobReaderParameter.put("collectionName",collection);
         //设置datax的job的content的reader的parameter的column，先处理传递的columns
