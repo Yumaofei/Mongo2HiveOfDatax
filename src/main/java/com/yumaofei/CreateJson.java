@@ -55,12 +55,16 @@ public class CreateJson {
         jobSetting.put("speed",jobSettingSpeed);
         //设置datax的job的setting的speed
         jobSettingSpeed.put("channel",1);
-        //创建datax的job的content的reader和writer
+        //创建datax的job的content的数组中对象（reader和writer）
+        JSONObject jobContentarr1 = new JSONObject();
+        //设置datax的job的content
+        jobContent.set(0,jobContentarr1);
+        //创建datax的job的content的数组对象的reader和writer
         JSONObject jobContentReader = new JSONObject();
         JSONObject jobContentWriter = new JSONObject();
-        //设置datax的job的content
-        jobContent.set(0,jobContentReader);
-        jobContent.set(1,jobContentWriter);
+        //设置datax的job的content数组中对象（reader和writer）
+        jobContentarr1.put("reader",jobContentReader);
+        jobContentarr1.put("writer",jobContentWriter);
 
 //      -------------------reader的相关参数设置-------------------
         //创建datax的job的content的reader的parameter
@@ -70,14 +74,14 @@ public class CreateJson {
         jobContentReader.put("parameter",jobReaderParameter);
         //设置datax的job的content的reader的parameter的address
         ArrayList<String> address = new ArrayList<>();
-        address.add("${amazonDSorceDbAddress}");
+        address.add("");
         jobReaderParameter.put("address",address);
         //设置datax的job的content的reader的parameter的userName
-        jobReaderParameter.put("userName","${amazonDSorceDbUsername}");
+        jobReaderParameter.put("userName","");
         //设置datax的job的content的reader的parameter的userPassword
-        jobReaderParameter.put("userPassword","${amazonDSorceDbPassword}");
+        jobReaderParameter.put("userPassword","");
         //设置datax的job的content的reader的parameter的dbName
-        jobReaderParameter.put("dbName","${amazonDSorceDbDatabase}");
+        jobReaderParameter.put("dbName","");
         //设置datax的job的content的reader的parameter的collectionName
         jobReaderParameter.put("collectionName",collection);
         //设置datax的job的content的reader的parameter的column，先处理传递的columns
