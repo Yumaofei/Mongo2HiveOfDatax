@@ -50,13 +50,14 @@ public class MG2HV {
             MongoCursor<Document> cur = findIterable.iterator();
             while (cur.hasNext()) {
                 Map<String, Object> object = cur.next();
+//                System.out.println(object);
                 for (String key : object.keySet()) {
                     Object obj = object.get(key);
                     try {
                         if (obj instanceof Document) {
                             data.put(key, "json");
                         } else if (obj instanceof List) {
-                            data.put(key, "array");
+                            data.put(key, "json");
                         } else if (obj instanceof Double) {
                             data.put(key,"double");
                         } else { //其他一律按string处理
