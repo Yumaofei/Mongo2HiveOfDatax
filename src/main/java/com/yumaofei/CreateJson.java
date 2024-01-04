@@ -74,14 +74,14 @@ public class CreateJson {
         jobContentReader.put("parameter",jobReaderParameter);
         //设置datax的job的content的reader的parameter的address
         ArrayList<String> address = new ArrayList<>();
-        address.add("${zhiziSorceDbAddress}");
+        address.add("${待传}");
         jobReaderParameter.put("address",address);
         //设置datax的job的content的reader的parameter的userName
-        jobReaderParameter.put("userName","${zhiziSorceDbUsername}");
+        jobReaderParameter.put("userName","${待传}");
         //设置datax的job的content的reader的parameter的userPassword
-        jobReaderParameter.put("userPassword","${zhiziSorceDbPassword}");
+        jobReaderParameter.put("userPassword","${待传}");
         //设置datax的job的content的reader的parameter的dbName
-        jobReaderParameter.put("dbName","${zhiziSorceDbDatabase}");
+        jobReaderParameter.put("dbName","${待传}");
         //设置datax的job的content的reader的parameter的collectionName
         jobReaderParameter.put("collectionName",collection);
         //设置datax的job的content的reader的parameter的column，先处理传递的columns
@@ -95,7 +95,7 @@ public class CreateJson {
         jobContentWriter.put("name","hdfswriter");
         jobContentWriter.put("parameter",jobWriterParameter);
         //设置datax的job的content的writer的parameter的defaultFS
-        jobWriterParameter.put("defaultFS","${defaultFS}");
+        jobWriterParameter.put("defaultFS","hdfs://${dfs_nameservices}");
         //设置datax的job的content的writer的parameter的path
         //path包括地址、目录，其中目录包含库、系统、表名、是否分区
         String path = "${hiveErpDbHdfsDir}";
@@ -115,12 +115,27 @@ public class CreateJson {
         //设置datax的job的content的writer的parameter的compress
         jobWriterParameter.put("compress","snappy");
         //设置datax的job的content的writer的parameter的fileName
-
         jobWriterParameter.put("fileName",tableName);
         //设置datax的job的content的writer的parameter的writeMode
         jobWriterParameter.put("writeMode","truncate");
         //设置datax的job的content的writer的parameter的fieldDelimiter
         jobWriterParameter.put("fieldDelimiter","\t");
+        //创建datax的jb的content的writer的parameter的hadoopConfig
+        JSONObject jobWriterParameterHadoopConfig = new JSONObject();
+        //设置datax的job的content的writer的parameter的hadoopConfig
+        jobWriterParameterHadoopConfig.put("dfs.nameservices","${dfs_nameservices}");
+        //设置datax的job的content的writer的parameter的hadoopConfig
+        jobWriterParameterHadoopConfig.put("dfs.ha.namenodes.${dfs_nameservices}","${dfs_ha_namenodes}");
+        //设置datax的job的content的writer的parameter的hadoopConfig
+        jobWriterParameterHadoopConfig.put("dfs.namenode.rpc-address.${dfs_nameservices}.hn01","${nn_rpc_hn01}");
+        //设置datax的job的content的writer的parameter的hadoopConfig
+        jobWriterParameterHadoopConfig.put("dfs.namenode.rpc-address.${dfs_nameservices}.hn02","${nn_rpc_hn02}");
+        //设置datax的job的content的writer的parameter的hadoopConfig
+        jobWriterParameterHadoopConfig.put("dfs.namenode.rpc-address.${dfs_nameservices}.hn03","${nn_rpc_hn03}");
+        //设置datax的job的content的writer的parameter的hadoopConfig
+        jobWriterParameterHadoopConfig.put("dfs.client.failover.proxy.provider.${dfs_nameservices}","org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider");
+        //设置datax的job的content的writer的parameter的hadoopConfig
+        jobWriterParameter.put("hadoopConfig",jobWriterParameterHadoopConfig);
         //设置datax的job的content的writer的parameter的column，，先处理传递的columns
         JSONArray writerParameterColumn = writerParameterColumnFCT(columnsMap);
         jobWriterParameter.put("column",writerParameterColumn);
@@ -131,9 +146,12 @@ public class CreateJson {
     private JSONArray readerParameterColumnFCT(LinkedHashMap<String, String> columnsMap){
         ArrayList<LinkedHashMap<String, String>> columnsList = new ArrayList<>();
         for (String key : columnsMap.keySet()){
+            String value = columnsMap.get(key);
             LinkedHashMap<String, String> map = new LinkedHashMap<>();
             map.put("name",key);
-            map.put("type",columnsMap.get(key));
+            map.put("type",value);
+            if (value.equals("array"))
+                map.put("splitter",",");
             columnsList.add(map);
         }
         //创建datax的job的content的reader的parameter的column
